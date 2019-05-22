@@ -1,0 +1,14 @@
+==================================================================
+CONTRACT ADDRESSES
+==================================================================
+EightHoursToken:	0xf8e1fAa0367298b55F57Ed17F7a2FF3F5F1D1628
+AacInterface:		0xFeEe51963f0A865aebB232aC5e39d9d2b9085B3b
+AacCreation:		0xB16C35A4b4e5A3d23A560483673d89Ed44FE5781
+AacColoredTokens:	0x5e15b749Fd68f693148FB4B5A7d36f55d86a19bE
+AacExternalTokens:	0xf52018E37eE7Cd54723c7B2427D97C6Fb805d96c
+LockedTokens:		0x35f1a890A6B4C6B3B64AA7a748bFBEfa3D3352C3
+
+==================================================================
+COMPILER VERSION
+==================================================================
+0.5.4+commit.9549d8ff
