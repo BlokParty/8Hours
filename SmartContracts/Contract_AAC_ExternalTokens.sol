@@ -71,7 +71,7 @@ interface VIP180 {
 
 //-----------------------------------------------------------------------------
 /// @title AAC External Token Handler
-/// @notice Defines depositing and withdrawal of VeThor and VIP-180-compliant
+/// @notice Defines depositing and withdrawal of VET and VIP-180-compliant
 ///  tokens into AACs.
 //-----------------------------------------------------------------------------
 contract AacExternalTokens is Ownable {
@@ -146,13 +146,13 @@ contract AacExternalTokens is Ownable {
     }
     
     //-------------------------------------------------------------------------
-    /// @notice Deposit VeThor from sender to approved AAC
-    /// @dev Throws if VeThor to deposit is zero. Throws if sender is not
+    /// @notice Deposit VET from sender to approved AAC
+    /// @dev Throws if VET to deposit is zero. Throws if sender is not
     ///  approved to operate AAC #`toUid`. Throws if sender has insufficient 
     ///  balance for deposit.
-    /// @param _toUid the AAC to deposit the VeThor into
+    /// @param _toUid the AAC to deposit the VET into
     //-------------------------------------------------------------------------
-    function depositVeThor(uint _toUid) 
+    function depositVET(uint _toUid) 
         external 
         payable 
         canOperate(_toUid)
@@ -165,21 +165,21 @@ contract AacExternalTokens is Ownable {
     }
 
     //-------------------------------------------------------------------------
-    /// @notice Withdraw VeThor from approved AAC to AAC's owner
-    /// @dev Throws if VeThor to withdraw is zero. Throws if sender is not an
+    /// @notice Withdraw VET from approved AAC to AAC's owner
+    /// @dev Throws if VET to withdraw is zero. Throws if sender is not an
     ///  approved operator for AAC #`_fromUid`. Throws if AAC 
     ///  #`_fromUid` has insufficient balance to withdraw.
-    /// @param _fromUid the AAC to withdraw the VeThor from
-    /// @param _amount the amount of VeThor to withdraw (in Wei)
+    /// @param _fromUid the AAC to withdraw the VET from
+    /// @param _amount the amount of VET to withdraw (in Wei)
     //-------------------------------------------------------------------------
-    function withdrawVeThor(
+    function withdrawVET(
         uint _fromUid, 
         uint _amount
     ) external canOperate(_fromUid) notZero(_amount) {
-        // AAC must have sufficient VeThor balance
+        // AAC must have sufficient VET balance
         require (
             externalTokenBalances[address(this)][_fromUid] >= _amount,
-            "Insufficient VeThor to withdraw"
+            "Insufficient VET to withdraw"
         );
         // subtract amount from AAC's balance
         externalTokenBalances[address(this)][_fromUid] -= _amount;
@@ -191,23 +191,23 @@ contract AacExternalTokens is Ownable {
     }
 
     //-------------------------------------------------------------------------
-    /// @notice Withdraw VeThor from approved AAC and send to '_to'
-    /// @dev Throws if VeThor to transfer is zero. Throws if sender is not an
-    ///  approved operator for AAC #`to_fromUidUid`. Throws if AAC
+    /// @notice Withdraw VET from approved AAC and send to '_to'
+    /// @dev Throws if VET to transfer is zero. Throws if sender is not an
+    ///  approved operator for AAC #`_fromUid`. Throws if AAC
     ///  #`_fromUid` has insufficient balance to withdraw.
-    /// @param _fromUid the AAC to withdraw and send the VeThor from
-    /// @param _to the address to receive the transferred VeThor
-    /// @param _amount the amount of VeThor to withdraw (in Wei)
+    /// @param _fromUid the AAC to withdraw and send the VET from
+    /// @param _to the address to receive the transferred VET
+    /// @param _amount the amount of VET to withdraw (in Wei)
     //-------------------------------------------------------------------------
-    function transferVeThorToWallet(
+    function transferVETToWallet(
         uint _fromUid,
         address payable _to,
         uint _amount
     ) external canOperate(_fromUid) notZero(_amount) {
-        // AAC must have sufficient VeThor balance
+        // AAC must have sufficient VET balance
         require (
             externalTokenBalances[address(this)][_fromUid] >= _amount,
-            "Insufficient VeThor to transfer"
+            "Insufficient VET to transfer"
         );
         // subtract amount from AAC's balance
         externalTokenBalances[address(this)][_fromUid] -= _amount;
@@ -218,7 +218,7 @@ contract AacExternalTokens is Ownable {
     }
     
     //-------------------------------------------------------------------------
-    /// @notice Transfer VeThor from your AAC to another AAC
+    /// @notice Transfer VET from your AAC to another AAC
     /// @dev Throws if tokens to transfer is zero. Throws if sender is not an
     ///  approved operator for AAC #`_fromUid`. Throws if AAC #`_fromUid` has 
     ///  insufficient balance to transfer. Throws if receiver does not exist.
@@ -226,7 +226,7 @@ contract AacExternalTokens is Ownable {
     /// @param _toUid the identifier of the AAC to receive the VIP-180 tokens
     /// @param _amount the number of tokens to send
     //-------------------------------------------------------------------------
-    function transferVeThorToWalletToAAC (
+    function transferVETToAAC (
         uint _fromUid, 
         uint _toUid, 
         uint _amount
@@ -236,7 +236,7 @@ contract AacExternalTokens is Ownable {
         // AAC must have sufficient token balance
         require (
             externalTokenBalances[address(this)][_fromUid] >= _amount,
-            "insufficient tokens to withdraw"
+            "insufficient tokens to transfer"
         );
         // subtract amount from sender's balance
         externalTokenBalances[address(this)][_fromUid] -= _amount;
@@ -368,7 +368,7 @@ contract AacExternalTokens is Ownable {
         // AAC must have sufficient token balance
         require (
             externalTokenBalances[_tokenAddress][_fromUid] >= _tokens,
-            "insufficient tokens to withdraw"
+            "insufficient tokens to transfer"
         );
         // initialize token contract
         VIP180 tokenContract = VIP180(_tokenAddress);
@@ -404,7 +404,7 @@ contract AacExternalTokens is Ownable {
         // AAC must have sufficient token balance
         require (
             externalTokenBalances[_tokenAddress][_fromUid] >= _tokens,
-            "insufficient tokens to withdraw"
+            "insufficient tokens to transfer"
         );
         // subtract amount from sender's balance
         externalTokenBalances[_tokenAddress][_fromUid] -= _tokens;
@@ -434,7 +434,7 @@ contract AacExternalTokens is Ownable {
     //-------------------------------------------------------------------------
     /// @notice Get external token balance for tokens deposited into AAC
     ///  #`_uid`.
-    /// @dev To query VeThor, use THIS CONTRACT'S address as '_tokenAddress'.
+    /// @dev To query VET, use THIS CONTRACT'S address as '_tokenAddress'.
     /// @param _uid Owner of the tokens to query
     /// @param _tokenAddress Token creator contract address 
     //-------------------------------------------------------------------------
