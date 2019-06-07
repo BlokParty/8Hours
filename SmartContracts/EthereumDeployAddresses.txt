@@ -1,0 +1,14 @@
+==================================================================
+CONTRACT ADDRESSES (ETHEREUM)
+==================================================================
+EightHoursToken:	0x7eb790c9fc772aadeb965404941b08fc68b8613f  ~
+AacInterface:		0xd68Cb83b9FB0acd8E2Ab4EaBBf20d94761Becf57  ~~
+AacCreation:		0x844a23f03B15eeC241f376A2A95148c78C092a9f  ~~
+AacColoredTokens:	0x1906EC68D06772d938D893A63f7BF35e0035D90A  ~~
+AacExternalTokens:	0xDd8637458DDFBF0CA31C3F7ff7BE76ea5013FdC5  ~~
+LockedTokens:		0xfd72fb686bee4ff641c52e8c89556600b438e586  ~
+
+==================================================================
+COMPILER VERSION
+==================================================================
+v0.5.1+commit.c8a2cb62
